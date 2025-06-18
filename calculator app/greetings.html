@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome - Calculator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #74ebd5, #acb6e5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .welcome-box {
+      background: white;
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 2s ease-in-out;
+      max-width: 95%;
+      width: 600px;
+    }
+
+    .welcome-box h1 {
+      font-size: 40px;
+      line-height: 1.5;
+      color: #2d3436;
+      margin-bottom: 20px;
+      white-space: pre-line; /* Keeps line breaks */
+    }
+
+    .welcome-box p {
+      font-size: 18px;
+      color: #2d3436;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      margin-bottom: 30px;
+    }
+
+    .logo img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn {
+      padding: 14px 30px;
+      font-size: 18px;
+      background-color: #0984e3;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #74b9ff;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="welcome-box">
+    <h1>🌟 Welcome to Our<br>Calculator Website! 🌟</h1>
+    <p>This calculator tool was proudly invented by <strong>Sasi Kanth Sai</strong>.</p>
+    <div class="logo">
+      <img src="https://media-tir3-3.cdn.whatsapp.net/v/t61.24694-24/491878838_1838530276997293_407856708016552685_n.jpg?ccb=11-4&oh=01_Q5Aa1wFy5F7zNRioTsuryxh1yY3GFU7TTwh7SNS6BN72Kb4f1g&oe=685934C7&_nc_sid=5e03e0&_nc_cat=111" alt="Sasi Kanth Sai Logo">
+    </div>
+    <a href="index.html" class="btn">Continue to Calculator</a>
+  </div>
+
+</body>
+</html>

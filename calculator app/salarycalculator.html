@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Salary Calculator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 450px;
+      text-align: center;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .container:hover {
+      transform: scale(1.02);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #2d3436;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin: 10px 0 5px;
+      font-weight: bold;
+      color: #2d3436;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #fd79a8;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #e84393;
+      transform: translateY(-2px);
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #2d3436;
+      font-weight: 600;
+    }
+
+    .back-button {
+      margin-top: 15px;
+      background-color: #74b9ff;
+    }
+
+    .back-button:hover {
+      background-color: #0984e3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Salary Calculator</h1>
+
+    <label for="hours">Hours Worked</label>
+    <input type="number" id="hours" placeholder="Enter total hours worked">
+
+    <label for="rate">Hourly Rate (₹)</label>
+    <input type="number" id="rate" placeholder="Enter hourly wage">
+
+    <button onclick="calculateSalary()">Calculate</button>
+
+    <div class="result" id="result"></div>
+
+    <button class="back-button" onclick="goBack()">⬅ Back to Home</button>
+  </div>
+
+  <script>
+    function calculateSalary() {
+      const hours = parseFloat(document.getElementById('hours').value);
+      const rate = parseFloat(document.getElementById('rate').value);
+      const resultDiv = document.getElementById('result');
+
+      if (!hours || !rate || hours < 0 || rate < 0) {
+        resultDiv.textContent = "Please enter valid inputs.";
+        return;
+      }
+
+      const salary = hours * rate;
+      resultDiv.innerHTML = `Total Salary: ₹${salary.toFixed(2)}`;
+    }
+
+    function goBack() {
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraction Calculator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #1c2526;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 28px;
+            color: white;
+            transition: transform 0.2s;
+        }
+
+        .navbar h1:hover {
+            transform: scale(1.05);
+        }
+
+        .calculator-container {
+            background: #1c2526;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            width: 320px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .fraction-input {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .fraction-input input {
+            width: 70px;
+            padding: 10px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 8px;
+            background: #e0e0e0;
+            color: #333;
+            text-align: center;
+            font-size: 18px;
+            transition: transform 0.1s;
+        }
+
+        .fraction-input input:focus {
+            transform: scale(1.05);
+            outline: none;
+        }
+
+        .fraction-line {
+            width: 70px;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #e0e0e0;
+        }
+
+        .operation-select {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            background: #3a4a4b;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.1s, background 0.2s;
+        }
+
+        select:hover {
+            background: #546e7a;
+            transform: scale(1.05);
+        }
+
+        select:active {
+            transform: scale(0.95);
+        }
+
+        button.calculate {
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            background: #388e3c;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: transform 0.1s, background 0.2s;
+        }
+
+        button.calculate:hover {
+            background: #43a047;
+            transform: scale(1.05);
+        }
+
+        button.calculate:active {
+            transform: scale(0.95);
+        }
+
+        button.clear {
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            background: #d32f2f;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: transform 0.1s, background 0.2s;
+        }
+
+        button.clear:hover {
+            background: #e53935;
+            transform: scale(1.05);
+        }
+
+        button.clear:active {
+            transform: scale(0.95);
+        }
+
+        .result {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 18px;
+            color: #e0e0e0;
+            background: #3a4a4b;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .error {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 18px;
+            color: #e0e0e0;
+            background: #d32f2f;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .back-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #0288d1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.1s, background 0.2s;
+        }
+
+        .back-button:hover {
+            background: #03a9f4;
+            transform: scale(1.05);
+        }
+
+        .back-button:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 400px) {
+            .calculator-container {
+                width: 280px;
+            }
+
+            .fraction-input input {
+                width: 60px;
+                margin: 0 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Fraction Calculator</h1>
+    </div>
+    <div class="calculator-container">
+        <div class="fraction-input">
+            <input type="number" id="num1" placeholder="Num" required>
+            <span class="fraction-line">/</span>
+            <input type="number" id="den1" placeholder="Den" required>
+        </div>
+        <div class="operation-select">
+            <select id="operation">
+                <option value="add">+</option>
+                <option value="subtract">-</option>
+                <option value="multiply">×</option>
+                <option value="divide">÷</option>
+            </select>
+        </div>
+        <div class="fraction-input">
+            <input type="number" id="num2" placeholder="Num" required>
+            <span class="fraction-line">/</span>
+            <input type="number" id="den2" placeholder="Den" required>
+        </div>
+        <button class="calculate" onclick="calculate()">Calculate</button>
+        <button class="clear" onclick="clearInputs()">Clear</button>
+        <div class="result" id="result"></div>
+        <div class="error" id="error"></div>
+    </div>
+    <button class="back-button" onclick="goBack()">Back</button>
+
+    <script>
+        function goBack() {
+            try {
+                window.location.href = 'index.html';
+            } catch (e) {
+                alert('Main page (index.html) not found. Please ensure it exists in the same directory.');
+            }
+        }
+
+        function gcd(a, b) {
+            return b === 0 ? a : gcd(b, a % b);
+        }
+
+        function simplifyFraction(num, den) {
+            const divisor = gcd(Math.abs(num), Math.abs(den));
+            return [num / divisor, den / divisor];
+        }
+
+        function clearInputs() {
+            document.getElementById('num1').value = '';
+            document.getElementById('den1').value = '';
+            document.getElementById('num2').value = '';
+            document.getElementById('den2').value = '';
+            document.getElementById('operation').value = 'add';
+            document.getElementById('result').innerHTML = '';
+            document.getElementById('error').innerHTML = '';
+        }
+
+        function calculate() {
+            const num1 = parseInt(document.getElementById('num1').value);
+            const den1 = parseInt(document.getElementById('den1').value);
+            const num2 = parseInt(document.getElementById('num2').value);
+            const den2 = parseInt(document.getElementById('den2').value);
+            const operation = document.getElementById('operation').value;
+            const resultDiv = document.getElementById('result');
+            const errorDiv = document.getElementById('error');
+
+            resultDiv.innerHTML = '';
+            errorDiv.innerHTML = '';
+
+            if (isNaN(num1) || isNaN(den1) || isNaN(num2) || isNaN(den2)) {
+                errorDiv.innerHTML = 'Please enter valid numbers';
+                return;
+            }
+
+            if (den1 === 0 || den2 === 0) {
+                errorDiv.innerHTML = 'Denominator cannot be zero';
+                return;
+            }
+
+            let resultNum, resultDen;
+
+            switch (operation) {
+                case 'add':
+                    resultNum = num1 * den2 + num2 * den1;
+                    resultDen = den1 * den2;
+                    break;
+                case 'subtract':
+                    resultNum = num1 * den2 - num2 * den1;
+                    resultDen = den1 * den2;
+                    break;
+                case 'multiply':
+                    resultNum = num1 * num2;
+                    resultDen = den1 * den2;
+                    break;
+                case 'divide':
+                    if (num2 === 0) {
+                        errorDiv.innerHTML = 'Cannot divide by zero';
+                        return;
+                    }
+                    resultNum = num1 * den2;
+                    resultDen = den1 * num2;
+                    break;
+            }
+
+            const [simplifiedNum, simplifiedDen] = simplifyFraction(resultNum, resultDen);
+
+            resultDiv.innerHTML = `Result: ${simplifiedNum}/${simplifiedDen}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Time Calculator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to right, #c2e9fb, #a1c4fd);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 100%;
+      max-width: 450px;
+      position: relative;
+    }
+
+    h1 {
+      color: #2d3436;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #2d3436;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      margin-top: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      background-color: #0984e3;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0652dd;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #2d3436;
+    }
+
+    .back-button {
+      margin-top: 25px;
+      background-color: #74b9ff;
+      color: white;
+      font-size: 16px;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #0984e3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Time Difference Calculator</h1>
+
+    <label for="time1">Start Time:</label>
+    <input type="time" id="time1">
+
+    <label for="time2">End Time:</label>
+    <input type="time" id="time2">
+
+    <button onclick="calculateTimeDifference()">Calculate</button>
+
+    <div class="result" id="result"></div>
+
+    <button class="back-button" onclick="goBack()">⬅ Back to Home</button>
+  </div>
+
+  <script>
+    function calculateTimeDifference() {
+      const t1 = document.getElementById('time1').value;
+      const t2 = document.getElementById('time2').value;
+      const result = document.getElementById('result');
+
+      if (!t1 || !t2) {
+        result.textContent = "Please enter both times.";
+        return;
+      }
+
+      const [h1, m1] = t1.split(':').map(Number);
+      const [h2, m2] = t2.split(':').map(Number);
+
+      const date1 = new Date(0, 0, 0, h1, m1, 0);
+      const date2 = new Date(0, 0, 0, h2, m2, 0);
+
+      let diff = (date2 - date1) / (1000 * 60); // difference in minutes
+      if (diff < 0) diff += 1440; // handle overnight
+
+      const hours = Math.floor(diff / 60);
+      const minutes = diff % 60;
+
+      result.innerHTML = `Difference: <br><strong>${hours} hour(s) and ${minutes} minute(s)</strong>`;
+    }
+
+    function goBack() {
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>

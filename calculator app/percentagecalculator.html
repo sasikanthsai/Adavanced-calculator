@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Percentage Calculator</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #dfe9f3, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      width: 320px;
+      text-align: center;
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #2d3436;
+    }
+
+    input, button {
+      width: 100%;
+      margin: 8px 0;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      transition: border-color .2s;
+    }
+
+    input:focus {
+      border-color: #0984e3;
+      outline: none;
+    }
+
+    button {
+      background: #0984e3;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background .2s;
+    }
+
+    button:hover {
+      background: #065f9e;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #2d3436;
+    }
+
+    .back-button {
+      margin-top: 15px;
+      background: #fd79a8;
+    }
+
+    .back-button:hover {
+      background: #d63031;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Percentage Calculator</h2>
+    <input id="pct" type="number" placeholder="Percentage (%)">
+    <input id="num" type="number" placeholder="Number">
+    <button onclick="calcPct()">Calculate</button>
+    <div id="result"></div>
+
+    <!-- Back Button -->
+    <button class="back-button" onclick="goBack()">⬅ Back to Home</button>
+  </div>
+
+  <script>
+    function calcPct() {
+      const p = parseFloat(document.getElementById('pct').value);
+      const n = parseFloat(document.getElementById('num').value);
+      const resultDiv = document.getElementById('result');
+
+      if (isNaN(p) || isNaN(n)) {
+        resultDiv.innerText = 'Enter valid numbers.';
+        return;
+      }
+
+      const res = (p / 100 * n).toFixed(2);
+      resultDiv.innerText = `${p}% of ${n} = ${res}`;
+    }
+
+    function goBack() {
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>

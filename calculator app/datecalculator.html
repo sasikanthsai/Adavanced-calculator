@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Date Calculator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      animation: slideFade 0.8s ease;
+    }
+
+    @keyframes slideFade {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 450px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #2d3436;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin: 10px 0 5px;
+      font-weight: bold;
+      color: #2d3436;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 2px solid #ccc;
+      margin-bottom: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      background-color: #6c5ce7;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #4834d4;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #2d3436;
+      font-weight: 600;
+    }
+
+    .back-button {
+      margin-top: 25px;
+      background-color: #a29bfe;
+      color: white;
+      font-size: 16px;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #6c5ce7;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Date Difference Calculator</h1>
+
+    <label for="start">Start Date:</label>
+    <input type="date" id="start">
+
+    <label for="end">End Date:</label>
+    <input type="date" id="end">
+
+    <button onclick="calculateDateDifference()">Calculate Difference</button>
+
+    <div class="result" id="result"></div>
+
+    <button class="back-button" onclick="goBack()">⬅ Back to Home</button>
+  </div>
+
+  <script>
+    function calculateDateDifference() {
+      const startDate = new Date(document.getElementById('start').value);
+      const endDate = new Date(document.getElementById('end').value);
+      const resultDiv = document.getElementById('result');
+
+      if (!startDate || !endDate || startDate > endDate) {
+        resultDiv.textContent = "Please enter valid dates.";
+        return;
+      }
+
+      const diffTime = endDate.getTime() - startDate.getTime();
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      const diffWeeks = Math.floor(diffDays / 7);
+      const diffMonths = Math.floor(diffDays / 30.44);
+      const diffYears = Math.floor(diffDays / 365.25);
+
+      resultDiv.innerHTML = `
+        Difference is: <br/>
+        <strong>${diffDays}</strong> days<br/>
+        <strong>${diffWeeks}</strong> weeks<br/>
+        <strong>${diffMonths}</strong> months<br/>
+        <strong>${diffYears}</strong> years
+      `;
+    }
+
+    function goBack() {
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>

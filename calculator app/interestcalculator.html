@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interest Calculator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .container:hover {
+      transform: scale(1.02);
+    }
+
+    h1 {
+      color: #2d3436;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin: 10px 0 5px;
+      font-weight: 600;
+      color: #2d3436;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+      margin-bottom: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #6c5ce7;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #341f97;
+      transform: translateY(-2px);
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #2d3436;
+    }
+
+    .back-button {
+      margin-top: 20px;
+      background-color: #fd79a8;
+    }
+
+    .back-button:hover {
+      background-color: #d63031;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Interest Calculator</h1>
+
+    <label for="principal">Principal (₹)</label>
+    <input type="number" id="principal" placeholder="Enter principal amount" />
+
+    <label for="rate">Rate (%)</label>
+    <input type="number" id="rate" placeholder="Enter annual interest rate" />
+
+    <label for="time">Time (Years)</label>
+    <input type="number" id="time" placeholder="Enter time in years" />
+
+    <label for="type">Type</label>
+    <select id="type">
+      <option value="">Select</option>
+      <option value="simple">Simple Interest</option>
+      <option value="compound">Compound Interest</option>
+    </select>
+
+    <button onclick="calculateInterest()">Calculate</button>
+
+    <div class="result" id="result"></div>
+
+    <!-- Back to Home button -->
+    <button class="back-button" onclick="goBack()">⬅ Back to Home</button>
+  </div>
+
+  <script>
+    function calculateInterest() {
+      const principal = parseFloat(document.getElementById("principal").value);
+      const rate = parseFloat(document.getElementById("rate").value);
+      const time = parseFloat(document.getElementById("time").value);
+      const type = document.getElementById("type").value;
+      const result = document.getElementById("result");
+
+      if (!principal || !rate || !time || !type) {
+        result.textContent = "Please fill all fields correctly.";
+        return;
+      }
+
+      let interest, total;
+
+      if (type === "simple") {
+        interest = (principal * rate * time) / 100;
+        total = principal + interest;
+        result.innerHTML = `Simple Interest: ₹${interest.toFixed(2)}<br>Total Amount: ₹${total.toFixed(2)}`;
+      } else {
+        total = principal * Math.pow(1 + rate / 100, time);
+        interest = total - principal;
+        result.innerHTML = `Compound Interest: ₹${interest.toFixed(2)}<br>Total Amount: ₹${total.toFixed(2)}`;
+      }
+    }
+
+    function goBack() {
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calorie Calculator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      animation: slideIn 1s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .container:hover {
+      transform: scale(1.02);
+    }
+
+    h1 {
+      color: #2d3436;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin: 10px 0 5px;
+      font-weight: 600;
+      color: #2d3436;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+      margin-bottom: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #ff7675;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #d63031;
+      transform: translateY(-2px);
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #2d3436;
+    }
+
+    .back-button {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #a29bfe;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #6c5ce7;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Calorie Calculator</h1>
+
+    <label for="age">Age</label>
+    <input type="number" id="age" placeholder="Enter your age" />
+
+    <label for="gender">Gender</label>
+    <select id="gender">
+      <option value="">Select</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+
+    <label for="weight">Weight (kg)</label>
+    <input type="number" id="weight" placeholder="Enter your weight in kg" />
+
+    <label for="height">Height (cm)</label>
+    <input type="number" id="height" placeholder="Enter your height in cm" />
+
+    <label for="activity">Activity Level</label>
+    <select id="activity">
+      <option value="">Select</option>
+      <option value="1.2">Sedentary</option>
+      <option value="1.375">Lightly active</option>
+      <option value="1.55">Moderately active</option>
+      <option value="1.725">Very active</option>
+      <option value="1.9">Super active</option>
+    </select>
+
+    <button onclick="calculateCalories()">Calculate Calories</button>
+
+    <div class="result" id="result"></div>
+
+    <button class="back-button" onclick="goBack()">⬅ Back to Home</button>
+  </div>
+
+  <script>
+    function calculateCalories() {
+      const age = parseInt(document.getElementById("age").value);
+      const gender = document.getElementById("gender").value;
+      const weight = parseFloat(document.getElementById("weight").value);
+      const height = parseFloat(document.getElementById("height").value);
+      const activity = parseFloat(document.getElementById("activity").value);
+      const result = document.getElementById("result");
+
+      if (!age || !weight || !height || !activity || !gender) {
+        result.textContent = "Please fill all fields correctly.";
+        return;
+      }
+
+      let bmr;
+
+      if (gender === "male") {
+        bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+      } else if (gender === "female") {
+        bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+      }
+
+      const calories = bmr * activity;
+      result.textContent = `Your daily calorie needs are approximately ${Math.round(calories)} kcal.`;
+    }
+
+    function goBack() {
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>
